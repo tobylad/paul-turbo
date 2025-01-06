@@ -1,0 +1,6 @@
+{
+  "name": "paul-turbo",
+  "identifier": "com.domain.app.paulturbo",
+  "version": "1.0.0",
+  "icon": "./static/icon.png"
+}
