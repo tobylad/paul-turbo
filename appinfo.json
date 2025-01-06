@@ -1,0 +1,12 @@
+{
+    "id": "com.tobylad.app.paulturbo",
+    "title": "paul-turbo",
+    "main": "index.html",
+    "icon": "",
+    "type": "web",
+    "vendor": "tobylad-dev",
+    "version": "1.0.0",
+    "appDescription": "Paul Walker Fast and Furious movies",
+    "resolution": "1920x1080",
+    "requiredPermissions": []
+  }
