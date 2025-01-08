@@ -5,6 +5,8 @@ export default class App extends Lightning.Component {
     return [{ family: 'Regular', url: Utils.asset('/fonts/Roboto-Regular.ttf') }]
   }
 
+  itemIndex = 0
+
   static _template() {
     return {
       Background: {
@@ -96,20 +98,17 @@ export default class App extends Lightning.Component {
   }
 
   _handleLeft() {
-    this._stopAnimation(this.tag('captionRight'))
-    this._animateCaption(this.tag('captionLeft'))
+    this.selectPreviousItem()
   }
 
   _handleRight() {
-    this._stopAnimation(this.tag('captionLeft'))
-    this._animateCaption(this.tag('captionRight'))
+    this.selectNextItem()
   }
 
   _handleEnter() {
     console.log('entering show page') 
     // TODO: Show page functionality. Holding off until deployment for time's sake.
   }
-
 
   _animateCaption(caption) {
     caption.animation({
@@ -122,10 +121,30 @@ export default class App extends Lightning.Component {
     }).start()
   }
 
-  _stopAnimation(caption) {
-    if (caption.animation) caption.animation().stop()
+  selectNextItem() {
+    if (this.itemIndex === 1) {
+      this.itemIndex = 0
+    } else {
+      this.itemIndex++
+    }
+
+    const captionValue = this.tag('ImageList').children[this.itemIndex].__treeTags.keys().next().value
+    this._animateCaption(this.tag(captionValue))
   }
 
+  selectPreviousItem() {
+    if (this.itemIndex === 0) {
+      this.itemIndex = 1
+    } else {
+      this.itemIndex--
+    }
+
+    const captionValue = this.tag('ImageList').children[this.itemIndex].__treeTags.keys().next().value
+    this._animateCaption(this.tag(captionValue))
+  }
+
+
+  // Intialize app
   _init() {
     this.tag('Background') // Note: a "TAG" string will refer to the named object in the template
       .animation({
