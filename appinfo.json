@@ -2,7 +2,7 @@
     "id": "com.tobylad.app.paulturbo",
     "title": "paul-turbo",
     "main": "dist/es6/index.html",
-    "icon": "",
+    "icon": "dist/es6/static/icon.png",
     "type": "web",
     "vendor": "tobylad-dev",
     "version": "1.0.0",
