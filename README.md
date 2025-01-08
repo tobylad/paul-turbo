@@ -29,3 +29,17 @@ During development you can use the **watcher** functionality of the _Lightning-C
 #### Documentation
 
 Use `lng docs` to open up the Lightning-SDK documentation.
+
+
+### Additional Docs
+
+>Please note that the above instructions will only get the app running locally on your browser. There's a bit more to do 
+if you want to try to run it on webOS. Here are some helpful steps and links if you want to try it out.
+
+- Download the Developer Mode app on your webOS-supported TV.
+- Register as a developer at developer.lge.com. Note you need an LG account *and* an LG developer account for this to work. Whew!
+- This article runs through the LG/Ares SDK and how to use it to link up your local system to the TV, enabling the app to run.
+https://webostv.developer.lge.com/develop/tools/cli-dev-guide#install-the-web-app
+
+Obviously you don't have to do this, but until I get this published this is a way for you to also see it on a TV. Ping me on
+LinkedIn with any questions and I'll be happy to help!
