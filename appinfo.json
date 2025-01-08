@@ -5,7 +5,7 @@
     "icon": "dist/es6/static/icon.png",
     "type": "web",
     "vendor": "tobylad-dev",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "appDescription": "Paul Walker Fast and Furious movies",
     "resolution": "1920x1080",
     "requiredPermissions": []
