@@ -5,7 +5,7 @@ export default class App extends Lightning.Component {
     return [{ family: 'Regular', url: Utils.asset('/fonts/Roboto-Regular.ttf') }]
   }
 
-  itemIndex = 0
+  itemIndex = null
 
   static _template() {
     return {
@@ -98,42 +98,68 @@ export default class App extends Lightning.Component {
   }
 
   _handleLeft() {
+    this.deSelectCurrentItem()
     this.selectPreviousItem()
   }
 
   _handleRight() {
+    this.deSelectCurrentItem()
     this.selectNextItem()
   }
 
   _handleEnter() {
-    console.log('entering show page') 
-    // TODO: Show page functionality. Holding off until deployment for time's sake.
+    console.log(`entering show page for item ${this.itemIndex}`) 
+    // TODO: Show page functionality.
   }
 
   _animateCaption(caption) {
     caption.animation({
       duration: 1,
-      repeat: 1,
+      repeat: 0,
       stopMethod: 'immediate',
       actions: [
-        { t: '', p: 'color', v: { 0: { v: 0xffffffff }, 0.5: { v: 0xffFF0000 }, 1.0: { v: 0xffffffff } },}
+        { t: '', p: 'alpha', v: { 0: { v: 1 }, 0.5: { v: 0.5 }, 1.0: { v: 1 } } }
       ]
     }).start()
   }
 
+  deSelectCurrentItem() {
+    if (this.itemIndex === null) {
+      return
+    }
+
+    const captionValue = this.tag('ImageList').children[this.itemIndex].__treeTags.keys().next().value
+
+    this.tag(captionValue).patch({
+      texture : {
+        textColor: 0xffffffff
+      }
+    })
+  }
+
   selectNextItem() {
-    if (this.itemIndex === 1) {
+    if (this.itemIndex === null) {
+      this.itemIndex = 0
+    } else if (this.itemIndex === 1) {
       this.itemIndex = 0
     } else {
       this.itemIndex++
     }
 
     const captionValue = this.tag('ImageList').children[this.itemIndex].__treeTags.keys().next().value
-    this._animateCaption(this.tag(captionValue))
+    this._animateCaption(this.tag(captionValue)) // animate selection
+
+    this.tag(captionValue).patch({ // update active selection by text color change
+      texture: {
+        textColor: 0xFF00FFFF
+      }
+    })
   }
 
   selectPreviousItem() {
-    if (this.itemIndex === 0) {
+    if (this.itemIndex === null) {
+      this.itemIndex = 1
+    } else if (this.itemIndex === 0) {
       this.itemIndex = 1
     } else {
       this.itemIndex--
@@ -141,6 +167,12 @@ export default class App extends Lightning.Component {
 
     const captionValue = this.tag('ImageList').children[this.itemIndex].__treeTags.keys().next().value
     this._animateCaption(this.tag(captionValue))
+
+    this.tag(captionValue).patch({ // update active selection by text color change
+      texture: {
+        textColor: 0xFF00FFFF
+      }
+    })
   }
 
 
