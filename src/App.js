@@ -7,6 +7,59 @@ export default class App extends Lightning.Component {
 
   itemIndex = null
 
+  static movieList = [
+    {
+      imageSrc: '/images/fastone.webp',
+      title: 'The Fast and The Furious',
+      tag: 'fastone'
+    },
+    {
+      imageSrc: '/images/fasttwo.webp',
+      title: '2 Fast 2 Furious',
+      tag: 'fasttwo'
+    },
+    {
+      imageSrc: '/images/fastthree.webp',
+      title: 'The Fast and The Furious: Tokyo Drift',
+      tag: 'fastthree'
+    },
+    {
+      imageSrc: '/images/fastfour.webp',
+      title: 'Fast & Furious',
+      tag: 'fastfour'
+    },
+    {
+      imageSrc: '/images/fastfive.webp',
+      title: 'Fast Five',
+      tag: 'fastfive'
+    },
+    {
+      imageSrc: '/images/fastsix.webp',
+      title: 'Fast & Furious 6',
+      tag: 'fastsix'
+    },
+    {
+      imageSrc: '/images/fastseven.webp',
+      title: 'Furious 7',
+      tag: 'fastseven'
+    },
+    {
+      imageSrc: '/images/fasteight.webp',
+      title: 'The Fate of the Furious',
+      tag: 'fasteight'
+    },
+    {
+      imageSrc: '/images/fastnine.webp',
+      title: 'F9: The Fast Saga',
+      tag: 'fastnine'
+    },
+    {
+      imageSrc: '/images/fastten.webp',
+      title: 'Fast X',
+      tag: 'fastten'
+    }
+  ]
+
   static _template() {
     return {
       Background: {
@@ -20,51 +73,23 @@ export default class App extends Lightning.Component {
         }
       },
       AppTitle: {
-        x: 50,
-        y: 50,
+        x: 20, 
+        y: 20,
         text: {
           text: "Welcome to paul-turbo!",
           fontFace: 'Regular',
-          fontSize: 48,
+          fontSize: 36,
           textColor: 0xbbffffff,
         },
       },
       ImageList: {
         x: 50,
-        y: 100,
-        w: 1000,
-        h: 800,
-        flex: { direction: 'row', wrap: true }, // Parent flexbox with 2 columns
-        children: [
-          { // FIRST CHILD
-            h: 425,
-            w: 250,
-            flex: { direction: 'column' }, // Each child is a column layout
-            flexItem: { margin: 40 }, // Margin between items
-            children: [
-              {
-                w: 250,
-                h: 375,
-                texture: {
-                  type: Lightning.textures.ImageTexture,
-                  src: Utils.asset('/images/fastandfurious1.jpg'),
-                }
-              },
-              {
-                w: 250,
-                h: 50,
-                texture: {
-                  type: Lightning.textures.TextTexture, // Explicitly use TextTexture
-                  text: 'The Fast and The Furious',
-                  fontFace: 'Regular',
-                  fontSize: 24,
-                  textColor: 0xffffffff, // White text color
-                },
-                tag: 'captionLeft'
-              },
-            ],
-          },
-          { // SECOND CHILD
+        y: 40,
+        w: 1920,
+        h: 1080,
+        flex: { direction: 'row', wrap: true },
+        children: this.movieList.map((movie) => {
+          return {
             h: 425,
             w: 250,
             flex: { direction: 'column' },
@@ -75,24 +100,24 @@ export default class App extends Lightning.Component {
                 h: 375,
                 texture: {
                   type: Lightning.textures.ImageTexture,
-                  src: Utils.asset('/images/2fast2furious.jpg'),
-                },
+                  src: Utils.asset(movie.imageSrc),
+                }
               },
               {
-                w: 250,
-                h: 50,
                 texture: {
-                  type: Lightning.textures.TextTexture, // Explicitly use TextTexture
-                  text: '2 Fast 2 Furious',
+                  wordWrap: true,
+                  wordWrapWidth: 250,
+                  type: Lightning.textures.TextTexture,
+                  text: movie.title,
                   fontFace: 'Regular',
                   fontSize: 24,
-                  textColor: 0xffffffff, // White text color
+                  textColor: 0xffffffff,
                 },
-                tag: 'captionRight'
+                tag: movie.tag
               },
             ],
-          },
-        ],
+          }
+        }),
       }
     }
   }
@@ -140,7 +165,7 @@ export default class App extends Lightning.Component {
   selectNextItem() {
     if (this.itemIndex === null) {
       this.itemIndex = 0
-    } else if (this.itemIndex === 1) {
+    } else if (this.itemIndex === 9) {
       this.itemIndex = 0
     } else {
       this.itemIndex++
@@ -160,7 +185,7 @@ export default class App extends Lightning.Component {
     if (this.itemIndex === null) {
       this.itemIndex = 1
     } else if (this.itemIndex === 0) {
-      this.itemIndex = 1
+      this.itemIndex = 9
     } else {
       this.itemIndex--
     }
