@@ -88,7 +88,7 @@ export default class App extends Lightning.Component {
         w: 1920,
         h: 1080,
         flex: { direction: 'row', wrap: true },
-        children: this.movieList.map((movie) => {
+        children: App.movieList.map((movie) => {
           return {
             h: 425,
             w: 250,
@@ -165,7 +165,7 @@ export default class App extends Lightning.Component {
   selectNextItem() {
     if (this.itemIndex === null) {
       this.itemIndex = 0
-    } else if (this.itemIndex === 9) {
+    } else if (this.itemIndex === App.movieList.length - 1) {
       this.itemIndex = 0
     } else {
       this.itemIndex++
@@ -185,7 +185,7 @@ export default class App extends Lightning.Component {
     if (this.itemIndex === null) {
       this.itemIndex = 1
     } else if (this.itemIndex === 0) {
-      this.itemIndex = 9
+      this.itemIndex = App.movieList.length - 1
     } else {
       this.itemIndex--
     }
